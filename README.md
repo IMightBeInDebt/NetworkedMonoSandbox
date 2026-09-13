@@ -34,7 +34,7 @@ A mod for Gorilla Tag that adds Garry's mod things into Gorilla Tag (but network
 ---
 
 ## Credits
-- Ragdoll Mod: @InoxiGtag
+- Ragdoll Mod: InoxiGtag
 - Originally Made By: Monosphere
 
 ---
