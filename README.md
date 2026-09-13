@@ -1,8 +1,6 @@
 # IMightBeInDebt's Networked MonoSandbox
 A mod for Gorilla Tag that adds Garry's mod things into Gorilla Tag (but networked).
 
-<img src="https://www.image2url.com/r2/default/gifs/1780423272945-a2fce340-e3ba-4f66-8771-7c8a3ff18ef3.gif">
-
 ---
 
 # Controls
