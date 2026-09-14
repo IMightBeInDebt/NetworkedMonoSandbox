@@ -12,6 +12,7 @@ A mod for Gorilla Tag that adds Garry's mod things into Gorilla Tag (but network
 - Place: A **(VR)**
 - Activate: B **(VR)**
 - Use/Shoot: Right Trigger **(VR)**
+- Override Ragdoll: Right and Left Joystick **(HOLD)** **(VR)**
 
   <img src="https://raw.githubusercontent.com/IMightBeInDebt/NetworkedMonoSandbox/main/gifs/gif1.gif">
 
