@@ -5,16 +5,13 @@ using UnityEngine;
 #nullable disable
 namespace Ragdoll;
 
-// Watches the local player's speed and force-ragdolls when a fast peak is
-// immediately followed by a near-complete stop (running into a wall, hard
-// landing, etc). Attach it once - Main.Awake() does this for you below.
 public class ImpactRagdoll : MonoBehaviour
 {
     // --- Tuning ---
-    public float speedThreshold = 12f;     // m/s needed to "arm" the trigger
-    public float stopThreshold = 0.3f;    // m/s or below counts as "stopped"
-    public float peakWindow = 0.4f;       // seconds a fast peak stays valid before it decays
-    public float retriggerCooldown = 3f;  // minimum time between auto-triggers
+    public float speedThreshold = 12f;  
+    public float stopThreshold = 0.3f;  
+    public float peakWindow = 0.4f;       
+    public float retriggerCooldown = 3f;  
 
     private Vector3 lastPos;
     private bool hasLastPos;
@@ -37,9 +34,7 @@ public class ImpactRagdoll : MonoBehaviour
 
         float instantSpeed = (pos - lastPos).magnitude / Time.deltaTime;
         lastPos = pos;
-
-        // Remember the fastest speed seen recently; let it decay if too much
-        // time passes without a stop, so an old fast moment can't trigger later.
+        
         if (instantSpeed > peakSpeed)
         {
             peakSpeed = instantSpeed;
