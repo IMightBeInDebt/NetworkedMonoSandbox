@@ -29,8 +29,10 @@ public class ModsManager
     private static GameObject leftplat, rightplat, lefthandeffect, righthandeffect;
     private static bool clickedJoy = true;
     public static float acceleration = 0.17f;
-    private Vector2 xz;
-    private float y;
+    private Vector2 xzSteam;
+    private float ySteam;
+    private Vector2 xzQuest;
+    private float yQuest;
     public static float ActualFlySpeed = 8f;
     public static float speedboost = 9.5f;
     public static bool antiMute;
@@ -53,7 +55,7 @@ public class ModsManager
     {
         Rigidbody rb = GorillaTagger.Instance.rigidbody;
 
-        if (ControllerInputPoller.instance.leftGrab)
+        if (InputHandling.LeftGrip > 0.1f)
         {
             Vector3 leftForce = Mods.ModsManager.FlySpeed * -GorillaTagger.Instance.leftHandTransform.right;
             rb.AddForce(leftForce * Time.deltaTime, ForceMode.VelocityChange);
@@ -63,7 +65,7 @@ public class ModsManager
             VRRig.LocalRig.PlayHandTapLocal(115, true, 0.02f);
         }
 
-        if (ControllerInputPoller.instance.rightGrab)
+        if (InputHandling.RightGrip > 0.1f)
         {
             Vector3 rightForce = Mods.ModsManager.FlySpeed * GorillaTagger.Instance.rightHandTransform.right;
             rb.AddForce(rightForce * Time.deltaTime, ForceMode.VelocityChange);
@@ -74,13 +76,13 @@ public class ModsManager
         }
     }
 
-    public static void Fly()
+    public static void FlySteam()
     {
         Rigidbody attachedRigidbody = GTPlayer.Instance.bodyCollider.attachedRigidbody;
         attachedRigidbody.AddForce(-Physics.gravity * attachedRigidbody.mass * GTPlayer.Instance.scale);
-        var xz = ControllerInputPoller.instance.leftControllerPrimary2DAxis;
-        var y = ControllerInputPoller.instance.rightControllerPrimary2DAxis.y;
-        Vector3 vector3 = new Vector3(xz.x, y, xz.y);
+        var xz = InputHandling.LeftJoystickAxisSteam;
+        var y = InputHandling.RightJoystickAxisSteam.axis.y;
+        Vector3 vector3 = new Vector3(xz.axis.x, y, xz.axis.y);
         Vector3 forward = GTPlayer.Instance.bodyCollider.transform.forward with
         {
             y = 0.0f
@@ -90,6 +92,25 @@ public class ModsManager
             y = 0.0f
         };
         Vector3 b = (vector3.x * right + y * Vector3.up + vector3.z * forward) * FlySpeed;
+        attachedRigidbody.velocity = Vector3.Lerp(attachedRigidbody.velocity, b, acceleration);
+    }
+    
+    public static void FlyQuest()
+    {
+        Rigidbody attachedRigidbody = GTPlayer.Instance.bodyCollider.attachedRigidbody;
+        attachedRigidbody.AddForce(-Physics.gravity * attachedRigidbody.mass * GTPlayer.Instance.scale);
+        var xzQuest = InputHandling.LeftJoystickAxisQuest;
+        var yQuest = InputHandling.RightJoystickAxisQuest.y;
+        Vector3 vector3 = new Vector3(xzQuest.x, yQuest, xzQuest.y);
+        Vector3 forward = GTPlayer.Instance.bodyCollider.transform.forward with
+        {
+            x = 0.0f
+        };
+        Vector3 right = GTPlayer.Instance.bodyCollider.transform.right with
+        {
+            y = 0.0f
+        };
+        Vector3 b = (vector3.x * right + yQuest * Vector3.up + vector3.z * forward) * FlySpeed;
         attachedRigidbody.velocity = Vector3.Lerp(attachedRigidbody.velocity, b, acceleration);
     }
 

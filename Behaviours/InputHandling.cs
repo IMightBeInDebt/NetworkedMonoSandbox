@@ -8,8 +8,10 @@ namespace MonoSandbox.Behaviours
     public class InputHandling : MonoBehaviour
     {
         public static float LeftTrigger, RightTrigger, LeftGrip, RightGrip;
+        public static SteamVR_Action_Vector2 LeftJoystickAxisSteam, RightJoystickAxisSteam;
+        public static Vector2 LeftJoystickAxisQuest, RightJoystickAxisQuest;
         public static bool LeftPrimary, RightPrimary, LeftSecondary, RightSecondary, rightJoystickDown, leftJoystickDown;
-        public bool IsSteam = Traverse.Create(PlayFabAuthenticator.instance).Field("platform").GetValue().ToString().ToLower() == "steam";
+        public static bool IsSteam = Traverse.Create(PlayFabAuthenticator.instance).Field("platform").GetValue().ToString().ToLower() == "steam";
 
         public void Update()
         {
@@ -24,8 +26,11 @@ namespace MonoSandbox.Behaviours
                 RightPrimary = ControllerInputPoller.instance.rightControllerPrimaryButton;
                 RightSecondary = ControllerInputPoller.instance.rightControllerSecondaryButton;
 
+                // joystick
                 rightJoystickDown = GetRightJoystickDownQuest();
                 leftJoystickDown = GetLeftJoystickDownQuest();
+                RightJoystickAxisQuest = ControllerInputPoller.instance.rightControllerPrimary2DAxis;
+                LeftJoystickAxisQuest = ControllerInputPoller.instance.leftControllerPrimary2DAxis;
             }
             else
             {
@@ -38,8 +43,11 @@ namespace MonoSandbox.Behaviours
                 RightPrimary = SteamVR_Actions.gorillaTag_RightPrimaryClick.state;
                 RightSecondary = SteamVR_Actions.gorillaTag_RightSecondaryClick.state;
                 
+                // joystick
                 rightJoystickDown = GetRightJoystickDownSteam();
                 leftJoystickDown = GetLeftJoystickDownSteam();
+                RightJoystickAxisSteam = SteamVR_Actions.gorillaTag_RightJoystick2DAxis;
+                LeftJoystickAxisSteam = SteamVR_Actions.gorillaTag_LeftJoystick2DAxis;
             }
         }
 

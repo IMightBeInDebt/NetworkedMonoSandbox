@@ -359,7 +359,7 @@ namespace MonoSandbox
             // non-static mods
             if (_listManager.modsButtons[0]) // fly
             {
-                ModsManager.Fly();
+                ModsManager.FlySteam();
             }
             
             if (_listManager.modsButtons[1]) // iron monke

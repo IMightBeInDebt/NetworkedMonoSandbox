@@ -307,9 +307,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\sandboxbundle" />
+    <None Remove="Assets\Resources.barkbundle" />
     <None Remove="Notifications\notifications" />
     <None Remove="Assets\ragdollbundle" />
     <EmbeddedResource Include="Assets\ragdollbundle" />
+    <None Remove="Assets\fortnitebundle" />
   </ItemGroup>
 
   <PropertyGroup>
