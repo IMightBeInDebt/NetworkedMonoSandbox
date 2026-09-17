@@ -312,6 +312,7 @@
     <None Remove="Notifications\notifications" />
     <None Remove="Assets\ragdollbundle" />
     <EmbeddedResource Include="Assets\ragdollbundle" />
+    <None Remove="Assets\fortnitebundle" />
   </ItemGroup>
 
   <PropertyGroup>

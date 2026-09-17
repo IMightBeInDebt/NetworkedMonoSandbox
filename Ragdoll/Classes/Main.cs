@@ -43,6 +43,7 @@ public class Main : BaseUnityPlugin
   public static bool fbtEnabled = true;
   public static bool freeMoveEnabled = false;
   public static bool ragdollVelocityEnabled = true;
+  public static bool impactRagdoll = false;
   
   public static GameObject LoadAsset(string assetName)
   {
@@ -62,6 +63,7 @@ public class Main : BaseUnityPlugin
   private void Awake()
   {
     instance = this;
+    gameObject.AddComponent<ImpactRagdoll>();
   }
 
   public static AudioClip LoadSoundFromResource(string resourcePath)
@@ -388,10 +390,11 @@ public class Main : BaseUnityPlugin
     float x = (float) ((double) Screen.width / 2.0 - (double) width / 2.0);
     float y = (float) ((double) Screen.height / 2.0 - (double) height / 2.0);
     GUI.Box(new Rect(x, y, width, height), "Ragdoll Settings");
-    Plugin.ragdollVelocityEnabled = GUI.Toggle(new Rect(x + 20f, y + 30f, width - 40f, 30f), Plugin.ragdollVelocityEnabled, " Ragdoll Velocity");
-    Plugin.freeMoveEnabled = GUI.Toggle(new Rect(x + 20f, y + 60f, width - 40f, 30f), Plugin.freeMoveEnabled, " Free Move (walk while ragdolled)");
-    Plugin.showHintText = GUI.Toggle(new Rect(x + 20f, y + 90f, width - 40f, 30f), Plugin.showHintText, " Show Hint Text");
-    if (!GUI.Button(new Rect(x + 100f, y + 130f, 100f, 25f), "Close (Z)"))
+    Plugin.showHintText = GUI.Toggle(new Rect(x + 20f, y + 30, width - 40f, 30f), Plugin.showHintText, " Show Hint Text");
+    Plugin.ragdollVelocityEnabled = GUI.Toggle(new Rect(x + 20f, y + 60, width - 40f, 30f), Plugin.ragdollVelocityEnabled, " Ragdoll Velocity");
+    Plugin.freeMoveEnabled = GUI.Toggle(new Rect(x + 20f, y + 90f, width - 40f, 30f), Plugin.freeMoveEnabled, " Free Move (walk while ragdolled)");
+    Plugin.impactRagdoll = GUI.Toggle(new Rect(x + 20f, y + 120f, width - 40f, 30f), Plugin.impactRagdoll, " Impact Ragdoll");
+    if (!GUI.Button(new Rect(x + 100f, y + 150f, 100f, 25f), "Close (Z)"))
       return;
     Plugin.showGui = false;
   }

@@ -237,7 +237,7 @@ namespace MonoSandbox
             _initialized = true;
 
             #endregion
-
+            
             #region Spawn Da List
 
             _list = Instantiate(_bundle.LoadAsset<GameObject>("List"));
