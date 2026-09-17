@@ -8,10 +8,23 @@ namespace MonoSandbox.Behaviours
     public class InputHandling : MonoBehaviour
     {
         public static float LeftTrigger, RightTrigger, LeftGrip, RightGrip;
-        public static SteamVR_Action_Vector2 LeftJoystickAxisSteam, RightJoystickAxisSteam;
         public static Vector2 LeftJoystickAxisQuest, RightJoystickAxisQuest;
         public static bool LeftPrimary, RightPrimary, LeftSecondary, RightSecondary, rightJoystickDown, leftJoystickDown;
-        public static bool IsSteam = Traverse.Create(PlayFabAuthenticator.instance).Field("platform").GetValue().ToString().ToLower() == "steam";
+        private static bool? _isSteam;
+        public static bool IsSteam
+        {
+            get
+            {
+                if (_isSteam == null)
+                {
+                    if (PlayFabAuthenticator.instance == null)
+                        return false; // if not ready yet, try again the next call
+                    _isSteam = Traverse.Create(PlayFabAuthenticator.instance)
+                        .Field("platform").GetValue().ToString().ToLower() == "steam";
+                }
+                return _isSteam.Value;
+            }
+        }
 
         public void Update()
         {
@@ -46,8 +59,6 @@ namespace MonoSandbox.Behaviours
                 // joystick
                 rightJoystickDown = GetRightJoystickDownSteam();
                 leftJoystickDown = GetLeftJoystickDownSteam();
-                RightJoystickAxisSteam = SteamVR_Actions.gorillaTag_RightJoystick2DAxis;
-                LeftJoystickAxisSteam = SteamVR_Actions.gorillaTag_LeftJoystick2DAxis;
             }
         }
 

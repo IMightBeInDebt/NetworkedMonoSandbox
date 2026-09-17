@@ -75,25 +75,6 @@ public class ModsManager
             VRRig.LocalRig.PlayHandTapLocal(115, false, 0.02f);
         }
     }
-
-    public static void FlySteam()
-    {
-        Rigidbody attachedRigidbody = GTPlayer.Instance.bodyCollider.attachedRigidbody;
-        attachedRigidbody.AddForce(-Physics.gravity * attachedRigidbody.mass * GTPlayer.Instance.scale);
-        var xz = InputHandling.LeftJoystickAxisSteam;
-        var y = InputHandling.RightJoystickAxisSteam.axis.y;
-        Vector3 vector3 = new Vector3(xz.axis.x, y, xz.axis.y);
-        Vector3 forward = GTPlayer.Instance.bodyCollider.transform.forward with
-        {
-            y = 0.0f
-        };
-        Vector3 right = GTPlayer.Instance.bodyCollider.transform.right with
-        {
-            y = 0.0f
-        };
-        Vector3 b = (vector3.x * right + y * Vector3.up + vector3.z * forward) * FlySpeed;
-        attachedRigidbody.velocity = Vector3.Lerp(attachedRigidbody.velocity, b, acceleration);
-    }
     
     public static void FlyQuest()
     {
