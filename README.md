@@ -39,3 +39,5 @@ A mod for Gorilla Tag that adds Garry's mod things into Gorilla Tag (but network
 
 ---
 > This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2024 Another Axiom LLC.
+
+> This is a (deattached) fork of Monosphere's [MonoSandbox](https://github.com/Monosphere/Mono-Sandbox-Mod) and Inoxi's [RagdollMod](https://github.com/InoxiGtag/RagdollMod)
